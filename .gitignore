@@ -2,4 +2,4 @@ engine/models/
 build/
 __pycache__/
 *.pyc
-videos/*.mp4
+

@@ -220,7 +220,8 @@ def thumbnail(spec):
         bt = text_img(tspec["badge"].upper(), font("black", 70), fill=WHITE)
         box = rrect(bt.width + 60, bt.height + 40, 18, (230, 30, 50, 255))
         box.alpha_composite(bt, (30, 20))
-        paste(im, box.rotate(-6, expand=True, resample=Image.BICUBIC), 1350, 60)
+        rb = box.rotate(-6, expand=True, resample=Image.BICUBIC)
+        paste(im, rb, W - rb.width - 50, 50)
     out = os.path.join(OUT, f"{spec['id']}_miniatura.jpg")
     im.convert("RGB").resize((1280, 720), Image.LANCZOS).save(out, quality=92)
     return out

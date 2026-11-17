@@ -440,7 +440,10 @@ def portrait(w, h, kind="m", rim=PINK, rim2=CYAN, seed=0):
     fd = ImageDraw.Draw(fade)
     for y in range(int(h * 0.85), h):
         fd.line([(0, y), (w, y)], fill=int(255 * (h - y) / (h * 0.15)))
-    out.putalpha(ImageChops.multiply(out.getchannel("A"), fade))
+    edge = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(edge).rectangle((30, 30, w - 30, h + 60), fill=255)
+    edge = edge.filter(ImageFilter.GaussianBlur(18))
+    out.putalpha(ImageChops.multiply(ImageChops.multiply(out.getchannel("A"), fade), edge))
     return out
 
 
